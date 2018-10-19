@@ -1,0 +1,125 @@
+#calcContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    background-color: aliceblue;
+    padding: 10px;
+}
+
+.number {
+    background-color: aquamarine;
+    border: 1px solid black;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+.operands {
+    background-color: rgb(195, 235, 221);
+    border: 1px solid black;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+}
+
+#numberDisplay {
+    grid-column: span 4;
+    background-color: blueviolet;
+    font-size: 30px;
+    padding: 20px;
+    text-align: end;
+}
+
+#add {
+    grid-row: 3;
+    grid-column: 4;
+    grid-row-start: 3;
+    grid-row-end: 5;
+}
+
+
+
+#subtract {
+    grid-row: 2;
+    grid-column: 4;
+}
+
+#divide {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+#multiply {
+    grid-row: 2;
+    grid-column: 3;
+}
+
+#equals {
+    grid-row: 5;
+    grid-column: 4;
+    grid-row-start: 5;
+    grid-row-end: 7;
+}
+
+#operate {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+#oneBTN {
+    grid-row: 5;
+    grid-column: 1;    
+}
+
+#twoBTN {
+    grid-row: 5;
+    grid-column: 2; 
+    
+}
+
+#threeBTN {
+    grid-row: 5;
+    grid-column: 3; 
+}
+
+#fourBTN {
+    grid-row: 4;
+    grid-column: 1; 
+    
+}
+
+#fiveBTN {
+    grid-row: 4;
+    grid-column: 2; 
+    
+}
+
+#sixBTN {
+    grid-row: 4;
+    grid-column: 3; 
+    
+}
+
+#sevenBTN {
+    grid-row: 3;
+    grid-column: 1;    
+    
+}
+
+#eightBTN {
+    grid-row: 3;
+    grid-column: 2;   
+    
+}
+
+#nineBTN {
+    grid-row: 3;
+    grid-column: 3; 
+    
+}
+
+#zeroBTN {
+    grid-row: 6;
+    grid-column: 2; 
+    
+}
