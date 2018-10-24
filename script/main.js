@@ -56,12 +56,34 @@ const eight = document.getElementById('eightBTN');
 const nine = document.getElementById('nineBTN');
 const zero = document.getElementById('zeroBTN');
 
+// Number a and b
+let numA = 0;
+let numB = 0;
+let counter = 0;
+
 
 const numbers = document.querySelectorAll('.number');
 
 numbers.forEach((number) => {
     number.addEventListener('click', (e) => {
         console.log(number.id + "\n" + number.innerHTML);
+        //numberDisplay.innerText = number.innerHTML;
+        updateDisplay(number);
+        storeNumber(number);
     });
 
 });
+
+function storeNumber(number) {
+    if (counter == 1) {
+        numB = Number(number.innerHTML);
+        counter = 0;
+    } else {
+        numA = Number(number.innerHTML);
+    }
+    counter++;
+}
+
+function updateDisplay(number) {
+    numberDisplay.innerText = number.innerHTML;
+}
