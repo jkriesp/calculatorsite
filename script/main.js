@@ -59,11 +59,13 @@ const zero = document.getElementById('zeroBTN');
 // Number a and b
 let numA = 0;
 let numB = 0;
+// Counter to help assign numbers to numA or numB
 let counter = 0;
+// operator variable
+let operator = "";
 
-
+// Add click listeners to every number button
 const numbers = document.querySelectorAll('.number');
-
 numbers.forEach((number) => {
     number.addEventListener('click', (e) => {
         console.log(number.id + "\n" + number.innerHTML);
@@ -73,6 +75,19 @@ numbers.forEach((number) => {
     });
 
 });
+
+// Add click listeners to operator buttons
+const opButtons = document.querySelectorAll('.operands');
+opButtons.forEach((opButton) => {
+    opButton.addEventListener('click', (e) => {
+        console.log(opButton.id);
+        storeOperator(opButton);
+    })
+});
+
+function storeOperator(op) {
+    operator = op.id;
+}
 
 function storeNumber(number) {
     if (counter == 1) {
