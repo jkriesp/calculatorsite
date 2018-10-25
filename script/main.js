@@ -15,6 +15,8 @@ function divide(a, b) {
 }
 
 function operate(ope, a, b) {
+    a = Number(a);
+    b = Number(b);
     switch (ope) {
         case "add":
             return add(a, b);
@@ -57,21 +59,32 @@ const nine = document.getElementById('nineBTN');
 const zero = document.getElementById('zeroBTN');
 
 // Number a and b
-let numA = 0;
-let numB = 0;
+let numA = "";
+let numB = "";
 // Counter to help assign numbers to numA or numB
 let counter = 0;
 // operator variable
 let operator = "";
+let product = 0;
 
 // Add click listeners to every number button
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((number) => {
     number.addEventListener('click', (e) => {
         console.log(number.id + "\n" + number.innerHTML);
-        //numberDisplay.innerText = number.innerHTML;
-        updateDisplay(number);
-        storeNumber(number);
+        //updateDisplay(number);
+        //storeNumber(number);
+
+        if (operator.length < 1) {
+            numA += "" + number.innerHTML;
+            updateDisplay(numA);
+        } else if (operator.length > 1) {
+            numB += "" + number.innerHTML;
+            updateDisplay(numB);
+        }
+        
+        console.log("numA: " + numA);
+        console.log("numB: " + numB);
     });
 
 });
@@ -80,8 +93,16 @@ numbers.forEach((number) => {
 const opButtons = document.querySelectorAll('.operands');
 opButtons.forEach((opButton) => {
     opButton.addEventListener('click', (e) => {
-        console.log(opButton.id);
-        storeOperator(opButton);
+        console.log(opButton.id);       
+        if (opButton.id == "equals") {
+            console.log("operate clicked");
+            product = operate(operator, numA, numB);
+            console.log(product);
+            updateDisplay(product);
+
+        } if (opButton.id == "clear") {
+            clearNumbers();
+        } else storeOperator(opButton);
     })
 });
 
@@ -92,6 +113,7 @@ function storeOperator(op) {
 function storeNumber(number) {
     if (counter == 1) {
         numB = Number(number.innerHTML);
+
         counter = 0;
     } else {
         numA = Number(number.innerHTML);
@@ -99,6 +121,17 @@ function storeNumber(number) {
     counter++;
 }
 
+function clearNumbers() {
+    numA = "";
+    numB = "";
+    counter = 0;
+    product = "";
+    operator = "";
+    numberDisplay.innerText = 0;
+}
+
 function updateDisplay(number) {
-    numberDisplay.innerText = number.innerHTML;
+    if (number.innerHTML) {
+        numberDisplay.innerText = number.innerHTML;      
+    } else numberDisplay.innerText = number;
 }
