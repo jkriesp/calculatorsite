@@ -37,54 +37,44 @@ function operate(ope, a, b) {
 
 const numberDisplay = document.getElementById('numberDisplay');
 
-// Operators
-const addBTN = document.getElementById('add');
-const subtractBTN = document.getElementById('subtract');
-const divideBTN = document.getElementById('divide');
-const multiplyBTN = document.getElementById('multiply');
-const equalsBTN = document.getElementById('equals');
-const operateBTN = document.getElementById('operate');
-const clearBTN = document.getElementById('clear');
-
-// Number buttons
-const one = document.getElementById('oneBTN');
-const two = document.getElementById('twoBTN');
-const three = document.getElementById('threeBTN');
-const four = document.getElementById('fourBTN');
-const five = document.getElementById('fiveBTN');
-const six = document.getElementById('sixBTN');
-const seven = document.getElementById('sevenBTN');
-const eight = document.getElementById('eightBTN');
-const nine = document.getElementById('nineBTN');
-const zero = document.getElementById('zeroBTN');
-
-// Number a and b
-let numA = "";
-let numB = "";
+let displayNumber = "";
 // Counter to help assign numbers to numA or numB
 let counter = 0;
 // operator variable
 let operator = "";
 let product = 0;
 
+let numberArray = [];
+
 // Add click listeners to every number button
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((number) => {
     number.addEventListener('click', (e) => {
-        console.log(number.id + "\n" + number.innerHTML);
+        console.log("Just clicked: " + displayNumber);
         //updateDisplay(number);
         //storeNumber(number);
 
-        if (operator.length < 1) {
-            numA += "" + number.innerHTML;
-            updateDisplay(numA);
-        } else if (operator.length > 1) {
-            numB += "" + number.innerHTML;
-            updateDisplay(numB);
+        //         if (operator.length < 1) {
+        //             numA += "" + number.innerHTML;
+        //             numberArray.push(numA);
+        //             updateDisplay(numA);
+        //         } else if (operator.length > 1) {
+        //             numB += "" + number.innerHTML;
+        //             updateDisplay(numB);
+        //             numberArray.push(numB);
+        //         }
+
+        if (numberArray.length == 0) {
+            displayNumber += "" + number.innerHTML;
+            console.log("First number: " + displayNumber);
+
         }
-        
-        console.log("numA: " + numA);
-        console.log("numB: " + numB);
+        if (numberArray.length == 1) {
+            displayNumber += "" + number.innerHTML;
+            console.log("Second number: " + displayNumber);
+
+        }
+
     });
 
 });
@@ -93,18 +83,44 @@ numbers.forEach((number) => {
 const opButtons = document.querySelectorAll('.operands');
 opButtons.forEach((opButton) => {
     opButton.addEventListener('click', (e) => {
-        console.log(opButton.id);       
+        console.log(opButton.id);
+        addToArray(displayNumber);
+        console.log(numberArray);
         if (opButton.id == "equals") {
             console.log("operate clicked");
-            product = operate(operator, numA, numB);
+            product = operate(operator, numberArray[0], numberArray[1]);
             console.log(product);
             updateDisplay(product);
+            // Reset the numberArray and push the product so that 
+            // you can do continous operations
+            numberArray = [];
+            numberArray.push(product);
 
         } if (opButton.id == "clear") {
             clearNumbers();
-        } else storeOperator(opButton);
+        } else {
+            if (numberArray.length > 1) {
+                product = operate(operator, numberArray[0], numberArray[1]);
+                console.log(product);
+                updateDisplay(product);
+                // Reset the numberArray and push the product so that 
+                // you can do continous operations
+                numberArray = [];
+                numberArray.push(product);
+            }
+
+            storeOperator(opButton);
+            console.log(numberArray.length);
+        }
     })
 });
+
+function addToArray(displayNumber) {
+    console.log("addToArray: " + displayNumber);
+    numberArray.push(displayNumber);
+    displayNumber = "";
+    console.log("addToArray: " + displayNumber);
+}
 
 function storeOperator(op) {
     operator = op.id;
@@ -122,16 +138,17 @@ function storeNumber(number) {
 }
 
 function clearNumbers() {
-    numA = "";
-    numB = "";
     counter = 0;
     product = "";
     operator = "";
     numberDisplay.innerText = 0;
+    numberArray = [];
 }
 
 function updateDisplay(number) {
+    let rounded = Number(number.innerHTML)
+    rounded = Math.round(number * 10) / 10;
     if (number.innerHTML) {
-        numberDisplay.innerText = number.innerHTML;      
-    } else numberDisplay.innerText = number;
+        numberDisplay.innerText = rounded;
+    } else numberDisplay.innerText = rounded;
 }
