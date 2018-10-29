@@ -89,9 +89,9 @@ opButtons.forEach((opButton) => {
         addToArray(numA, numB);
         console.log(numberArray);
         if (opButton.id == "equals") {
-            console.log("operate clicked");
+            console.log("equals clicked");
             product = operate(operator, numberArray[0], numberArray[1]);
-            console.log(product);
+            console.log(numberArray[0] + operator + + numberArray[1] + " = " + product);
             updateDisplay(product);
             // Reset the numberArray and push the product so that 
             // you can do continous operations
@@ -109,6 +109,7 @@ opButtons.forEach((opButton) => {
                 // you can do continous operations
                 numberArray = [];
                 numberArray.push(product);
+                numB = "";
             }
 
             storeOperator(opButton);
