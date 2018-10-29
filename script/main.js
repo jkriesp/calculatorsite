@@ -40,8 +40,7 @@ const numberDisplay = document.getElementById('numberDisplay');
 let displayNumber = "";
 let numA = "";
 let numB = "";
-// Counter to help assign numbers to numA or numB
-let counter = 0;
+
 // operator variable
 let operator = "";
 let product = 0;
@@ -69,11 +68,13 @@ numbers.forEach((number) => {
         if (numberArray.length == 0) {
             numA += "" + number.innerHTML;
             console.log("First number: " + numA);
+            updateDisplay(numA);
 
         }
         if (numberArray.length == 1) {
             numB += "" + number.innerHTML;
             console.log("Second number: " + numB);
+            updateDisplay(numB);
 
         }
 
@@ -86,9 +87,17 @@ const opButtons = document.querySelectorAll('.operands');
 opButtons.forEach((opButton) => {
     opButton.addEventListener('click', (e) => {
         console.log(opButton.id);
-        addToArray(numA, numB);
+
+        // Check if numA isn't empty so not to add to array
+        // with empty "" numB variable
+        if (numA.length > 0 || numB !== "") {
+            addToArray(numA, numB);            
+        }
         console.log(numberArray);
-        if (opButton.id == "equals") {
+        if (opButton.id == "equals" 
+            && numberArray.length > 0
+            && numA !== ""
+            && numB !== "") {
             console.log("equals clicked");
             product = operate(operator, numberArray[0], numberArray[1]);
             console.log(numberArray[0] + operator + + numberArray[1] + " = " + product);
@@ -97,11 +106,13 @@ opButtons.forEach((opButton) => {
             // you can do continous operations
             numberArray = [];
             numberArray.push(product);
+            numA = product;
+            numB = "";
 
-        } if (opButton.id == "clear") {
-            clearNumbers();
         } else {
-            if (numberArray.length > 1) {
+            if (numberArray.length > 1 
+                && numA !== ""
+                && numB !== "") {
                 product = operate(operator, numberArray[0], numberArray[1]);
                 console.log(product);
                 updateDisplay(product);
@@ -109,9 +120,16 @@ opButtons.forEach((opButton) => {
                 // you can do continous operations
                 numberArray = [];
                 numberArray.push(product);
+                numA = "";
                 numB = "";
             }
 
+            if (numberArray.length > 1) {
+                numberArray = [];
+            }
+            if (opButton.id == "clear") {
+                clearNumbers();
+            }
             storeOperator(opButton);
             console.log("Array length: " + numberArray.length);
         }
@@ -123,34 +141,26 @@ function addToArray(numA, numB) {
     if (numberArray.length == 0) {
         numberArray.push(numA);
         console.log("numA addToArray: " + numA);
+        console.log("addToArray after \n" + "NumA: " + numA + "\nNumB: " + numB);
         numA = "";
     } else {
         numberArray.push(numB);
         console.log("numB addToArray: " + numB);
+        console.log("addToArray after \n" + "NumA: " + numA + "\nNumB: " + numB);
         numB = "";
     }
-    console.log("addToArray after \n" + "NumbA: " + numA + "\nNumB: " + numB);
+    
 }
 
 function storeOperator(op) {
     operator = op.id;
 }
 
-function storeNumber(number) {
-    if (counter == 1) {
-        numB = Number(number.innerHTML);
 
-        counter = 0;
-    } else {
-        numA = Number(number.innerHTML);
-    }
-    counter++;
-}
 
 function clearNumbers() {
     numA = "";
     numB = "";
-    counter = 0;
     product = "";
     operator = "";
     numberDisplay.innerText = 0;
