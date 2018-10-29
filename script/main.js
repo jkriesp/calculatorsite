@@ -38,6 +38,8 @@ function operate(ope, a, b) {
 const numberDisplay = document.getElementById('numberDisplay');
 
 let displayNumber = "";
+let numA = "";
+let numB = "";
 // Counter to help assign numbers to numA or numB
 let counter = 0;
 // operator variable
@@ -65,13 +67,13 @@ numbers.forEach((number) => {
         //         }
 
         if (numberArray.length == 0) {
-            displayNumber += "" + number.innerHTML;
-            console.log("First number: " + displayNumber);
+            numA += "" + number.innerHTML;
+            console.log("First number: " + numA);
 
         }
         if (numberArray.length == 1) {
-            displayNumber += "" + number.innerHTML;
-            console.log("Second number: " + displayNumber);
+            numB += "" + number.innerHTML;
+            console.log("Second number: " + numB);
 
         }
 
@@ -84,7 +86,7 @@ const opButtons = document.querySelectorAll('.operands');
 opButtons.forEach((opButton) => {
     opButton.addEventListener('click', (e) => {
         console.log(opButton.id);
-        addToArray(displayNumber);
+        addToArray(numA, numB);
         console.log(numberArray);
         if (opButton.id == "equals") {
             console.log("operate clicked");
@@ -110,16 +112,23 @@ opButtons.forEach((opButton) => {
             }
 
             storeOperator(opButton);
-            console.log(numberArray.length);
+            console.log("Array length: " + numberArray.length);
         }
     })
 });
 
-function addToArray(displayNumber) {
-    console.log("addToArray: " + displayNumber);
-    numberArray.push(displayNumber);
-    displayNumber = "";
-    console.log("addToArray: " + displayNumber);
+function addToArray(numA, numB) {
+
+    if (numberArray.length == 0) {
+        numberArray.push(numA);
+        console.log("numA addToArray: " + numA);
+        numA = "";
+    } else {
+        numberArray.push(numB);
+        console.log("numB addToArray: " + numB);
+        numB = "";
+    }
+    console.log("addToArray after \n" + "NumbA: " + numA + "\nNumB: " + numB);
 }
 
 function storeOperator(op) {
@@ -138,6 +147,8 @@ function storeNumber(number) {
 }
 
 function clearNumbers() {
+    numA = "";
+    numB = "";
     counter = 0;
     product = "";
     operator = "";
