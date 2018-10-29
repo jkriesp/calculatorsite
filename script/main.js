@@ -52,18 +52,6 @@ const numbers = document.querySelectorAll('.number');
 numbers.forEach((number) => {
     number.addEventListener('click', (e) => {
         console.log("Just clicked: " + displayNumber);
-        //updateDisplay(number);
-        //storeNumber(number);
-
-        //         if (operator.length < 1) {
-        //             numA += "" + number.innerHTML;
-        //             numberArray.push(numA);
-        //             updateDisplay(numA);
-        //         } else if (operator.length > 1) {
-        //             numB += "" + number.innerHTML;
-        //             updateDisplay(numB);
-        //             numberArray.push(numB);
-        //         }
 
         if (numberArray.length == 0) {
             numA += "" + number.innerHTML;
@@ -123,10 +111,7 @@ opButtons.forEach((opButton) => {
                 numA = "";
                 numB = "";
             }
-
-            if (numberArray.length > 1) {
-                numberArray = [];
-            }
+            
             if (opButton.id == "clear") {
                 clearNumbers();
             }
@@ -155,8 +140,6 @@ function addToArray(numA, numB) {
 function storeOperator(op) {
     operator = op.id;
 }
-
-
 
 function clearNumbers() {
     numA = "";
