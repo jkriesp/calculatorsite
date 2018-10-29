@@ -168,6 +168,10 @@ function clearNumbers() {
 }
 
 function updateDisplay(number) {
+    if (number == "Infinity") {
+        numberDisplay.innerText = "Divided by zero!";
+        return;
+    }
     let rounded = Number(number.innerHTML)
     rounded = Math.round(number * 10) / 10;
     if (number.innerHTML) {
