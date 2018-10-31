@@ -63,14 +63,15 @@ numbers.forEach((number) => {
     number.addEventListener('click', (e) => {
         console.log("Just clicked: " + number.innerHTML);
         
-        if (decimalCounter == 1 && number.innerHTML == ".") {
+        if (decimalCounter == 1 && number.innerHTML == "." ||
+            numA.length > 7 ||
+            numB.length > 7) {
             return;
         } else {
             if(number.innerHTML == ".") {
                 decimalCounter++;
             }
-            addNumbers(number);
-            
+            addNumbers(number);           
         }
 
     });
