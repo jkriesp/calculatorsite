@@ -49,6 +49,7 @@ const numberDisplay = document.getElementById('numberDisplay');
 let displayNumber = "";
 let numA = "";
 let numB = "";
+let decimalCounter = 0;
 
 // operator variable
 let operator = "";
@@ -60,24 +61,36 @@ let numberArray = [];
 const numbers = document.querySelectorAll('.number');
 numbers.forEach((number) => {
     number.addEventListener('click', (e) => {
-        console.log("Just clicked: " + displayNumber);
-
-        if (numberArray.length == 0) {
-            numA += "" + number.innerHTML;
-            console.log("First number: " + numA);
-            updateDisplay(numA);
-
-        }
-        if (numberArray.length == 1) {
-            numB += "" + number.innerHTML;
-            console.log("Second number: " + numB);
-            updateDisplay(numB);
-
+        console.log("Just clicked: " + number.innerHTML);
+        
+        if (decimalCounter == 1 && number.innerHTML == ".") {
+            return;
+        } else {
+            if(number.innerHTML == ".") {
+                decimalCounter++;
+            }
+            addNumbers(number);
+            
         }
 
     });
 
 });
+
+function addNumbers(number) {
+    if (numberArray.length == 0) {
+        numA += "" + number.innerHTML;
+        console.log("First number: " + numA);
+        updateDisplay(numA);
+
+    }
+    if (numberArray.length == 1) {
+        numB += "" + number.innerHTML;
+        console.log("Second number: " + numB);
+        updateDisplay(numB);
+
+    }
+}
 
 // Add click listeners to operator buttons
 const opButtons = document.querySelectorAll('.operands');
@@ -128,6 +141,7 @@ opButtons.forEach((opButton) => {
                 clearNumbers();
             }
             storeOperator(opButton);
+            decimalCounter = 0;
             console.log("Array length: " + numberArray.length);
         }
     })
@@ -154,9 +168,9 @@ function storeOperator(op) {
 }
 
 function clearNumbers() {
-    numA = "";
-    numB = "";
-    product = "";
+    numA = 0;
+    numB = 0;
+    product = 0;
     operator = "";
     numberDisplay.innerText = 0;
     numberArray = [];
@@ -165,6 +179,10 @@ function clearNumbers() {
 function updateDisplay(number) {
     if (number == "Infinity") {
         numberDisplay.innerText = "Divided by zero!";
+        return;
+    }
+    if (number == ".") {
+        numberDisplay.innerText = ".";
         return;
     }
     let rounded = Number(number.innerHTML)
