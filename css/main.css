@@ -36,9 +36,6 @@ h2 {
     height: 612px;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    
-    
-    
     margin: 32px auto;
 }
 
@@ -46,7 +43,7 @@ h2 {
     background-color: #434343;
     color: #A9A9A9;
     font-family: Roboto Light, sans-serif;
-    padding: 20px;
+    padding: 32px;
     font-size: 30px;
     text-align: center;
     cursor: pointer;
