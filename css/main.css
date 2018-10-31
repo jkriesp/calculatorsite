@@ -181,3 +181,8 @@ h2 {
     grid-column-end: 3;
     
 }
+
+#dotBTN {
+    grid-row: 6;
+    grid-column: 3;
+}
