@@ -72,6 +72,8 @@ h2 {
 }
 
 #numberDisplay {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
     grid-column: span 4;
     background-color: #FFFFFF;
     color: #828282;
