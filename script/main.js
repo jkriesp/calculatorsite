@@ -1,3 +1,11 @@
+/**
+ *  author: Jens Kristian Espevik
+ *  Calculator website to help practice HTML, CSS and
+ *  Javascript.
+ * 
+ */
+
+// Calculation functions 
 function add(a, b) {
     return a + b;
 }
@@ -32,7 +40,8 @@ function operate(ope, a, b) {
 }
 
 /**
- *  Calculator funcions
+ *  Calculator funcions to hook HTML to
+ *  calculation functions and to update display
  */
 
 const numberDisplay = document.getElementById('numberDisplay');
@@ -110,6 +119,9 @@ opButtons.forEach((opButton) => {
                 numberArray.push(product);
                 numA = "";
                 numB = "";
+            }
+            if (numberArray.length > 1) {
+                numberArray = [];
             }
             
             if (opButton.id == "clear") {
